@@ -1,9 +1,36 @@
 {
   "name": "Trevor Tyler Lee",
-  "bio": "Free, open source LinkTree alternative built with Astro & Tailwind CSS",
+  "bio": {
+    "en": "Free, open source LinkTree alternative built with Astro & Tailwind CSS",
+    "fr": "Alternative gratuite et open source à LinkTree, construite avec Astro & Tailwind CSS",
+    "es": "Alternativa gratuita y de código abierto a LinkTree, construida con Astro & Tailwind CSS"
+  },
   "profilePicture": "/profile-picture.jpg",
   "url": "https://trevortylerlee.com",
   "blog": true,
+  "multilang": {
+    "enabled": true,
+    "defaultLang": "en",
+    "showDefaultSelector": true,
+    "browserLanguageRedirect": true,
+    "languages": {
+      "en": {
+        "name": "English",
+        "flag": "🇺🇸",
+        "icon": "circle-flags:en"
+      },
+      "fr": {
+        "name": "Français",
+        "flag": "🇫🇷",
+        "icon": "circle-flags:fr"
+      },
+      "es": {
+        "name": "Español",
+        "flag": "🇪🇸",
+        "icon": "circle-flags:es"
+      }
+    }
+  },
   "iconLinks": [
     {
       "id": "1728534577184",
@@ -34,12 +61,20 @@
     },
     {
       "id": "1728534585739",
-      "title": " Best macOS apps",
+      "title": {
+        "en": "Best macOS apps",
+        "fr": "Meilleures applications macOS",
+        "es": "Mejores aplicaciones para macOS"
+      },
       "url": "https://macintoshapps.com"
     },
     {
       "id": "1728534585740",
-      "title": "💕 36 Questions To Fall In Love",
+      "title": {
+        "en": "💕 36 Questions To Fall In Love",
+        "fr": "💕 36 Questions Pour Tomber Amoureux",
+        "es": "💕 36 Preguntas Para Enamorarse"
+      },
       "url": "https://thirtysixquestions.org"
     },
     {
@@ -49,7 +84,11 @@
     },
     {
       "id": "1728534585742",
-      "title": "♥ Donate",
+      "title": {
+        "en": "♥ Donate",
+        "fr": "♥ Faire un don",
+        "es": "♥ Donar"
+      },
       "url": "https://donate.stripe.com/aEU6ow7VEf7u7sseUU"
     }
   ]
