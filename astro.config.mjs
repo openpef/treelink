@@ -10,5 +10,20 @@ export default defineConfig({
     "/blog": "/",
   },
   site: "https://example.treelink.com",
-  integrations: [tailwind(), sitemap(), icon()],
+  integrations: [
+    tailwind(), 
+    sitemap(), 
+    icon({
+      include: {
+        "circle-flags": ["*"]
+      }
+    })
+  ],
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "fr", "es"],
+    routing: {
+      prefixDefaultLocale: true
+    }
+  }
 });

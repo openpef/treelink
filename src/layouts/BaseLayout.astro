@@ -5,7 +5,7 @@ import BaseHead from "@/components/BaseHead.astro";
 import Footer from "@/components/Footer.astro";
 ---
 
-<html lang="en">
+<html lang={Astro.currentLocale}>
   <BaseHead>
     <slot name="head" />
   </BaseHead>

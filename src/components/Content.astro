@@ -1,23 +1,33 @@
 ---
 import { SITE } from "@/siteConfig";
-
-import Introduction from "@/components/Introduction.astro";
+import { getLocalizedValue } from "@/i18n";
 import IconLink from "@/components/IconLink.astro";
 import CustomLink from "@/components/CustomLink.astro";
+import Introduction from "@/components/Introduction.astro";
+import LanguageSelector from "@/components/LanguageSelector.astro";
 ---
 
-<Introduction />
-<ul class="flex justify-center gap-4 py-12">
-  {
-    SITE.iconLinks.map((link) => {
-      return <IconLink url={link.url} icon={link.icon} />;
-    })
-  }
-</ul>
-<ul class="grid gap-y-6 pb-12 pt-4">
-  {
-    SITE.customLinks.map((link) => {
-      return <CustomLink url={link.url}>{link.title}</CustomLink>;
-    })
-  }
-</ul>
+<div>
+  <Introduction />
+  {SITE.multilang.showDefaultSelector && (
+    <div class="flex justify-center mt-4">
+      <LanguageSelector useIcons={true} />
+    </div>
+  )}
+
+  <ul class="flex justify-center gap-4 py-12">
+    {
+      SITE.iconLinks.map((link) => {
+        return <IconLink url={link.url} icon={link.icon} />;
+      })
+    }
+  </ul>
+
+  <ul class="grid gap-y-6 pb-12 pt-4">
+    {
+      getLocalizedValue(SITE.customLinks, Astro.currentLocale).map((link) => {
+        return <CustomLink url={link.url}>{getLocalizedValue(link.title, Astro.currentLocale)}</CustomLink>;
+      })
+    }
+  </ul>
+</div>

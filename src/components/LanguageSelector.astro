@@ -1,0 +1,81 @@
+---
+import { SITE } from "@/siteConfig";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  class?: string;
+  useIcons?: boolean;  // New prop to choose between icons and flags
+}
+
+const { class: className = '', useIcons = false } = Astro.props;
+
+// Get current language from Astro
+const currentLang = Astro.currentLocale;
+
+// Function to generate the alternate language URL
+function getLanguageUrl(langCode: string) {
+  if (langCode === currentLang) return '#';
+  // Remove any existing language prefix
+  const basePath = Astro.url.pathname.replace(/^\/[a-z]{2}(?=\/|$)/, '');
+  // Always include prefix as configured in astro.config.mjs
+  return `/${langCode}${basePath}`;
+}
+---
+
+<div class:list={[
+  className,
+  'flex gap-2'
+]}>
+  {Object.entries(SITE.multilang.languages).map(([code, lang]) => (
+    <a
+      href={getLanguageUrl(code)}
+      class:list={[
+        'lang-link',
+        { 'active': currentLang === code }
+      ]}
+      title={lang.name}
+      aria-label={`Switch to ${lang.name}`}
+    >
+      {useIcons && lang.icon ? (
+        <Icon name={lang.icon} class="flag" />
+      ) : (
+        <span class="flag">{lang.flag}</span>
+      )}
+    </a>
+  ))}
+</div>
+
+<style>
+  .lang-link {
+    text-decoration: none;
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    opacity: 0.7;
+  }
+
+  .lang-link:hover {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  .lang-link.active {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .flag {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  /* Base styles for when not using default position */
+  div:not(.language-selector) {
+    display: flex;
+    gap: 0.5rem;
+  }
+</style> 
