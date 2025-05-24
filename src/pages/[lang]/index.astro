@@ -1,0 +1,41 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Content from "@/components/Content.astro";
+import Post from "@/components/Post.astro";
+import SeoPage from "@/components/SeoPage.astro";
+import { supportedLocales, defaultLocale } from "@/i18n";
+
+// Generate static paths for each language
+export const getStaticPaths = () => {
+  return supportedLocales.map(lang => ({
+    params: { lang }
+  }));
+};
+
+// Validate that we're getting a supported language
+const { lang = defaultLocale } = Astro.params;
+if (!supportedLocales.includes(lang)) {
+  return Astro.redirect(`/${defaultLocale}/`);
+}
+
+// Get and sort blog posts
+const posts = (await getCollection("blog")).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.publicationDate.valueOf() - a.data.publicationDate.valueOf(),
+);
+---
+
+<BaseLayout>
+  <SeoPage slot="head" />
+  <main>
+    <Content />
+    {posts.length > 0 && (
+      <ul class="grid list-none gap-y-8 px-0 py-12">
+        {posts.map((post: CollectionEntry<"blog">) => (
+          <Post post={post}></Post>
+        ))}
+      </ul>
+    )}
+  </main>
+</BaseLayout> 
