@@ -2,24 +2,25 @@
 import { Image } from "astro:assets";
 
 import { SITE } from "@/siteConfig";
+import { getLocalizedValue } from "@/i18n";
 
-import profilePicture from "@/assets/profile-picture.jpg";
+const currentLocale = Astro.currentLocale;
 ---
 
 <div class="mt-8 py-4">
   <Image
-    src={profilePicture}
-    alt={SITE.name}
+    src={SITE.profilePicture}
+    alt={getLocalizedValue(SITE.name, currentLocale)}
     height={256}
     width={256}
     loading="eager"
     draggable="false"
     class="mx-auto size-32 rounded-full"
   />
-  <h1 class="mt-4 text-center text-3xl font-semibold">{SITE.name}</h1>
-  <p
-    class="mt-1 text-balance text-center text-sm text-lightModeForegroundMuted dark:text-darkModeForegroundMuted"
-  >
-    {SITE.bio}
+  <h1 class="mt-4 text-center text-3xl font-semibold">
+    {getLocalizedValue(SITE.name, currentLocale)}
+  </h1>
+  <p class="mt-1 text-balance text-center text-sm text-lightModeForegroundMuted dark:text-darkModeForegroundMuted">
+    {getLocalizedValue(SITE.bio, currentLocale)}
   </p>
 </div>
